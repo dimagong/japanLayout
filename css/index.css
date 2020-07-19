@@ -67,7 +67,13 @@ body{
     position: fixed;
     left: 0;
     top: 0;
-    width: 100%;
+    width: 100%; 
+    transition: .2s linear;
+    padding-bottom: 20px;
+    z-index: 999;
+}
+.header__active{
+    background: #0E1D28;
 }
 .header__wrapper{
     padding-top: 56px;
