@@ -60,7 +60,6 @@ body{
     position: absolute;
     bottom: 0;
     left: 0;
-
 }
 
 /* Header styles */
@@ -294,7 +293,8 @@ body{
 .places__cards{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
-    grid-gap: 10px;
+    grid-column-gap: 10px;
+    grid-row-gap: 10px;
 }
 .places__card{
     position: relative;
@@ -359,7 +359,7 @@ body{
 .tours__tour{
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    grid-gap: 0 108px;
+    grid-column-gap: 108px;
     align-items: center;
     margin-bottom: 77px;
 }
@@ -385,7 +385,7 @@ body{
     font-size: 16px;
     line-height: 24px;
     color: #102746;
-    width: 519px;
+    max-width: 519px;
     margin-bottom: 58px;
 }
 .tour__more{
@@ -411,13 +411,15 @@ body{
 }
 .top__cards{
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    grid-gap: 57px;
+    grid-template-columns: repeat(6, 1fr);
+    grid-column-gap: 57px;
+    grid-row-gap: 57px;
 }
 
 .top__card{
     display: flex;
     flex-direction: column;
+    grid-column: span 2;
 }
 .top__card-pic{
     position: relative;
