@@ -17,6 +17,7 @@
     const birgerItem = document.querySelector('.burger');
     const menu = document.querySelector('.header-nav');
     const menuCloseItem = document.querySelector('.header__nav-close');
+    const headerLinks = document.querySelectorAll('.header__link');
 
     birgerItem.addEventListener('click', () => {
         menu.classList.add('header-nav-active');
@@ -25,46 +26,51 @@
         menu.classList.remove('header-nav-active');
     });
 
-}())
+    if (window.innerWidth < 768) {
+        console.log('111111');
+        headerLinks.forEach((el) => {
+            el.onclick = () => menu.classList.remove('header-nav-active');
+        })
+    }
+}());
 
 
-    // Scroll to anchors
-    (function () {
+// Scroll to anchors
+(function () {
 
-        const smoothScroll = function (targetEl, duration) {
-            const headerElHeight = document.querySelector('.header').clientHeight;
-            let target = document.querySelector(targetEl);
-            let targetPosition = target.getBoundingClientRect().top - headerElHeight;
-            let startPosition = window.pageYOffset;
-            let startTime = null;
+    const smoothScroll = function (targetEl, duration) {
+        const headerElHeight = document.querySelector('.header').clientHeight;
+        let target = document.querySelector(targetEl);
+        let targetPosition = target.getBoundingClientRect().top - headerElHeight;
+        let startPosition = window.pageYOffset;
+        let startTime = null;
 
-            const ease = function (t, b, c, d) {
-                t /= d / 2;
-                if (t < 1) return c / 2 * t * t + b;
-                t--;
-                return -c / 2 * (t * (t - 2) - 1) + b;
-            };
-
-            const animation = function (currentTime) {
-                console.log(currentTime);
-                if (startTime === null) startTime = currentTime;
-                const timeElapsed = currentTime - startTime;
-                const run = ease(timeElapsed, startPosition, targetPosition, duration);
-                window.scrollTo(0, run);
-                if (timeElapsed < duration) requestAnimationFrame(animation);
-            };
-            requestAnimationFrame(animation);
-
+        const ease = function (t, b, c, d) {
+            t /= d / 2;
+            if (t < 1) return c / 2 * t * t + b;
+            t--;
+            return -c / 2 * (t * (t - 2) - 1) + b;
         };
 
-        const scrollTo = function () {
-            const links = document.querySelectorAll('.js-scroll');
-            links.forEach(each => {
-                each.addEventListener('click', function () {
-                    const currentTarget = this.getAttribute('href');
-                    smoothScroll(currentTarget, 1000);
-                });
+        const animation = function (currentTime) {
+            if (startTime === null) startTime = currentTime;
+            const timeElapsed = currentTime - startTime;
+            const run = ease(timeElapsed, startPosition, targetPosition, duration);
+            window.scrollTo(0, run);
+            if (timeElapsed < duration) requestAnimationFrame(animation);
+        };
+        requestAnimationFrame(animation);
+
+    };
+
+    const scrollTo = function () {
+        const links = document.querySelectorAll('.js-scroll');
+        links.forEach(each => {
+            each.addEventListener('click', function () {
+                const currentTarget = this.getAttribute('href');
+                smoothScroll(currentTarget, 1000);
             });
-        };
-        scrollTo();
-    }());
+        });
+    };
+    scrollTo();
+}());
